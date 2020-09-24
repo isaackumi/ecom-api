@@ -10,6 +10,7 @@ if (isset($_POST['payment'])){
     $student_id = $_POST['student_id'];
 
     $res = postToPaymentApi($amount,$student_id,$key);
+//    print_r($res);
     if($res){
         echo $res;
 

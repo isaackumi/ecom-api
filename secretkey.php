@@ -11,16 +11,13 @@ function i0(){
     return base64_encode($m1);
 }
 
-//To use the function above, just call it. e.g.
-//echo i0();
 
-//add the return value to post parameters
-//userid, amount and secretkey (the echo value/content on line 7 above)
 
 
 
 function postToPaymentApi($amount, $student_id, $secret_key){
-    $data = array('amount' => $amount, 'student_id' => $student_id, 'secret_key' => $secret_key);
+    $data = array('amt' => $amount, 'userid' => $student_id, 'secretkey' => $secret_key);
+
     $endpoint = "https://apps.ashesi.edu.gh/e-com/";
     $curl = curl_init($endpoint);
     curl_setopt($curl, CURLOPT_POST, true);
@@ -45,6 +42,50 @@ function postToPaymentApi($amount, $student_id, $secret_key){
 
 //return response
 //echo $response
+
+
+
+function processPayment($amount,$student_id,$secret_key){
+
+
+    //API URL
+    $curl = curl_init();
+//    $redirect_url = "https://localhost/store/view/verifypayment.php";
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://apps.ashesi.edu.gh/e-com/",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode([
+            'amount'=>$amount,
+            'student_id'=>$student_id,
+            'secret_key'=>$secret_key,
+
+
+        ]),
+        CURLOPT_HTTPHEADER => [
+            "content-type: application/json",
+            "cache-control: no-cache"
+        ],
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    if($err){
+        // there was an error contacting the rave API
+        die('Curl returned error: ' . $err);
+    }
+
+    $transaction = json_decode($response);
+
+    if(!$transaction){
+        // there was an error from the API
+        print_r('API returned error: ');
+    }
+
+//    header('Location: ' . $transaction->data->link);
+}
 
 
 
