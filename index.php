@@ -22,17 +22,17 @@ $key = i0();
 </head>
 <body>
 <div>
-    <form method="post" action="">
+    <form method="post" action="process.php">
         <div class="form-group">
             <label for="exampleInputEmail1">Amount</label>
-            <input type="text" class="form-control col-lg-6" id="amount" aria-describedby="emailHelp" placeholder="amount">
-            <input type="text" class="form-control col-lg-6" id="id"  aria-describedby="emailHelp"  placeholder="Enter ID">
-            <input type="hidden" class="form-control" id="key" value="<?= isset($key)?($key):'' ?>" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="text" class="form-control col-lg-6" id="amount" name="amount" aria-describedby="emailHelp" placeholder="amount">
+            <input type="text" class="form-control col-lg-6" id="id"  name="student_id" aria-describedby="emailHelp"  placeholder="Enter ID">
+            <input type="hidden" class="form-control" id="key" name="secret_key" value="<?= isset($key)?($key):'' ?>" aria-describedby="emailHelp" placeholder="Enter email">
 
         </div>
 
 
-        <button type="submit" id="btn" class="btn btn-primary">Submit</button>
+        <button type="submit" id="btn1" name="payment" class="btn btn-primary">Submit</button>
     </form>
 </div>
 <script src="ajax.js"></script>
