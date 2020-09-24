@@ -57,9 +57,9 @@ function processPayment($amount,$student_id,$secret_key){
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => json_encode([
-            'amount'=>$amount,
-            'student_id'=>$student_id,
-            'secret_key'=>$secret_key,
+            'amt'=>$amount,
+            'userid'=>$student_id,
+            'secretkey'=>$secret_key,
 
 
         ]),
@@ -79,9 +79,11 @@ function processPayment($amount,$student_id,$secret_key){
 
     $transaction = json_decode($response);
 
-    if(!$transaction){
+    if($transaction){
         // there was an error from the API
-        print_r('API returned error: ');
+        return $transaction;
+    }else{
+        return false;
     }
 
 //    header('Location: ' . $transaction->data->link);
