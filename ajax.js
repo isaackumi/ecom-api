@@ -4,16 +4,16 @@ $(document).ready(function(){
 
     $( "#form" ).submit(function( event ) {
         event.preventDefault();
-        var amount = $("#amount"). val();
-        var id = $("#id"). val();
+        // var amount = $("#amount"). val();
+        var country = $("#country"). val();
         var key = $("#key"). val();
-        const endpoint = "https://apps.ashesi.edu.gh/e-com/";
+        const endpoint = "http://13.68.189.1/api_quiz/country.php";
         // alert(amount);
 
             const user  = {
-                'amt':amount,
-                'userid':id,
-                'secretkey': key
+
+                'country':country,
+                'key': key
 
             }
 
@@ -22,7 +22,25 @@ $(document).ready(function(){
             url: endpoint,
             data: user,
             success: function(data){
-                alert(data);
+                // console.log(data);
+                if(data.hasOwnProperty('error')){
+                  var err = data['error'];
+                  $('#error').html(err);
+
+
+                }else{
+                  var code = data[0]['country_code'];
+                  var phonecode = data[0]['phonecode'];
+                  $('#code').html(code);
+                  $('#phonecode').html(phonecode);
+                  // console.log(code,phonecode);
+                }
+
+
+            },
+
+            error: function(err){
+              console.log(`An error occured`);
             }
 
         });

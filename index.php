@@ -1,8 +1,8 @@
 <?php
 
-require ('secretkey.php');
+// require ('secretkey.php');
 
-$key = i0();
+$key = 'kumfrez';
 
 
 
@@ -26,13 +26,13 @@ $key = i0();
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-<div>
+<div class="col col-lg-6">
     <form method="post" action="" id="form">
         <div class="form-group">
-            <label for="exampleInputEmail1">Amount</label>
-            <input type="text" class="form-control col-lg-6" id="amount" name="amount" aria-describedby="emailHelp" placeholder="amount">
-            <input type="text" class="form-control col-lg-6" id="id"  name="student_id" aria-describedby="emailHelp"  placeholder="Enter ID">
-            <input type="hidden" class="form-control" id="key" name="secret_key" value="<?= isset($key)?($key):'' ?>" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="exampleInputEmail1">Form</label>
+            <!-- <input type="text" class="form-control col-lg-6" id="amount" name="amount" aria-describedby="emailHelp" placeholder="amount"> -->
+            <input type="text" class="form-control col-lg-6" id="country"  name="country" aria-describedby="emailHelp"  placeholder="Enter country"><br><br>
+            <input type="text" class="form-control" id="key" name="key" value="<?= isset($key)?($key):'' ?>" aria-describedby="emailHelp" placeholder="Enter email">
 
         </div>
 
@@ -40,6 +40,16 @@ $key = i0();
         <button type="submit" id="btn1" name="payment" class="btn btn-primary">Submit</button>
     </form>
 </div>
+<div class="center mt-5 col-lg-6">
+<h3 style="color:green;">Result</h3>
+
+<label for="exampleInputEmail1">ISO code:</label>
+ <p id="code" style="color:green;"></p>
+<label for="exampleInputEmail1">Phone code:</label>
+<p id="phonecode" style="color:green;"></p>
+<p style="color:red;" id="error" class="alert"></p>
+</div>
 <script src="ajax.js"></script>
+<script src="alert.js"></script>
 </body>
 </html>
